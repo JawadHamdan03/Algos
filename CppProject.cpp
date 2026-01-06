@@ -2,14 +2,22 @@
 using namespace std;
 
 
-// sorting nums[j] and nums[j+1] in i times 
+// keep finding the idx of the smallest element then swap it with element at i 
 // O(n^2)
-void bubbleSort(vector<int> &nums)
+void SelectionSort(vector<int> &nums)
 {
 	for (int i = 0; i < nums.size(); i++)
 	{
-		for (int j = 0; j < nums.size()-1; j++)
-			if (nums[j] > nums[j + 1]) swap(nums[j],nums[j+1]);
+		int idx=i;
+		int smallest = nums[i];
+		for (int j = i+1; j < nums.size() ; j++)
+		{
+			if (nums[j] < nums[i])
+			{
+				idx = j;
+			}
+		}
+		swap(nums[i], nums[idx]);
 	}
 }
 
@@ -19,7 +27,7 @@ int main()
 {
 	vector<int> vec = { 5,4,3,2,1 };
 	
-	bubbleSort(vec);
+	SelectionSort(vec);
 	for (int i : vec)
 		cout << i << " ";
 }
