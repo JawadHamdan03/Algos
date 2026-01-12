@@ -17,24 +17,77 @@ struct TreeNode {
     TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
 };
 
-void insertionSort(vector<int> &arr)
+
+void merge(vector<int>&leftArr , vector<int>& rightArr,vector<int> &arr)
 {
-    for (int i = 1; i < arr.size(); i++)
+    int leftSize = arr.size() / 2;
+    int rightSize = arr.size() - leftSize;
+    int i = 0, l = 0, r = 0;
+
+    while (l< leftSize && r < rightSize)
     {
-        int temp = arr[i];
-        int j = i - 1;
-        while (j>=0 && arr[j] > temp)
+        if (leftArr[l] < rightArr[r])
         {
-            arr[j + 1] = arr[j];
-            j--;
+            arr[i] = leftArr[l];
+            i++; l++;
         }
-        arr[j + 1] = temp;
+        else {
+            arr[i] = rightArr[r];
+            i++; r++;
+        }
     }
+    while (l < leftSize)
+    {
+        arr[i] = leftArr[l];
+        i++;
+        l++;
+    }
+    while (r < rightSize)
+    {
+        arr[i] = rightArr[r];
+        i++;
+        r++;
+    }
+}
+
+void MergeSort(vector<int> & arr)
+{
+    int length = arr.size();
+
+    if (length<=1) // base case 
+        return;
+
+    int middle = length / 2;
+
+    vector<int> leftArr(middle);
+    vector<int> rightArr(length-middle);
+
+    int i = 0; // left array
+    int j = 0; // right array
+
+    for (;i<length;i++)
+    {
+        if (i<middle)
+        {
+            leftArr[i] = arr[i];
+        }
+        else
+        {
+            rightArr[j] = arr[i];
+            j++;
+        }
+    }
+    MergeSort(leftArr);
+    MergeSort(rightArr);
+    merge(leftArr,rightArr,arr);
+    
 }
 
 int main()
 {
-    vector<int> in = {5,2,7,4,6,8};
-    insertionSort(in);
-    for (int i : in) cout << i << " ";
+    
+    vector<int> arr = {8,2,5,3,4,7,6,1};
+    MergeSort(arr);
+    for (int i : arr)
+        cout << i << " ";
 }
