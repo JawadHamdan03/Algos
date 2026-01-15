@@ -18,76 +18,48 @@ struct TreeNode {
 };
 
 
-void merge(vector<int>&leftArr , vector<int>& rightArr,vector<int> &arr)
-{
-    int leftSize = arr.size() / 2;
-    int rightSize = arr.size() - leftSize;
-    int i = 0, l = 0, r = 0;
 
-    while (l< leftSize && r < rightSize)
+int partition(vector<int>& arr, int start, int end)
+{
+    int pivot = arr[end];
+    int i = start - 1;
+    for (int j = start; j <= end - 1; j++)
     {
-        if (leftArr[l] < rightArr[r])
+        if (arr[j] < pivot)
         {
-            arr[i] = leftArr[l];
-            i++; l++;
-        }
-        else {
-            arr[i] = rightArr[r];
-            i++; r++;
+            i++;
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
         }
     }
-    while (l < leftSize)
-    {
-        arr[i] = leftArr[l];
-        i++;
-        l++;
-    }
-    while (r < rightSize)
-    {
-        arr[i] = rightArr[r];
-        i++;
-        r++;
-    }
+    i++;
+    int temp = arr[i];
+    arr[i] = arr[end];
+    arr[end] = temp;
+    return i;
 }
 
-void MergeSort(vector<int> & arr)
+void QuickSort(vector<int> & arr, int start , int end)
 {
-    int length = arr.size();
-
-    if (length<=1) // base case 
+    if (end <= start)
+    {
         return;
-
-    int middle = length / 2;
-
-    vector<int> leftArr(middle);
-    vector<int> rightArr(length-middle);
-
-    int i = 0; // left array
-    int j = 0; // right array
-
-    for (;i<length;i++)
-    {
-        if (i<middle)
-        {
-            leftArr[i] = arr[i];
-        }
-        else
-        {
-            rightArr[j] = arr[i];
-            j++;
-        }
     }
-    MergeSort(leftArr);
-    MergeSort(rightArr);
-    merge(leftArr,rightArr,arr);
-    
+
+    int pivot = partition(arr, start, end);
+    QuickSort(arr,start,pivot-1);
+    QuickSort(arr,pivot+1,end);
+
+
 }
+
+
 
 int main()
 {
-    
     vector<int> arr = {8,2,5,3,4,7,6,1};
-    MergeSort(arr);
+    QuickSort(arr,0,arr.size()-1);
     for (int i : arr)
         cout << i << " ";
 }

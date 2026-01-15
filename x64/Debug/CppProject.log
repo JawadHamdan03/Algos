@@ -1,5 +1,3 @@
 ﻿  CppProject.cpp
-C:\Users\hamda\source\repos\ConsoleApplications\CppProject\CppProject.cpp(23,18): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\hamda\source\repos\ConsoleApplications\CppProject\CppProject.cpp(24,19): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\hamda\source\repos\ConsoleApplications\CppProject\CppProject.cpp(55,16): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\hamda\source\repos\ConsoleApplications\CppProject\CppProject.cpp(62,31): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   CppProject.vcxproj -> C:\Users\hamda\source\repos\ConsoleApplications\x64\Debug\CppProject.exe
